@@ -18,8 +18,7 @@ class CityResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug,
-            'created_at' => Carbon::parse($this->created_at)->format("d.m.Y")
+            'slug' => $this->slug
         ];
     }
 }
