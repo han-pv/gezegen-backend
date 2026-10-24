@@ -13,16 +13,11 @@ class CitySeeder extends Seeder
     public function run(): void
     {
         $cities = [
-            ['name' => 'İstanbul', 'slug' => 'istanbul'],
-            ['name' => 'Ankara', 'slug' => 'ankara'],
+            ['name' => 'Ashgabat', 'slug' => 'ashgabat'],
+            ['name' => 'New York', 'slug' => 'new-york'],
             ['name' => 'İzmir', 'slug' => 'izmir'],
-            ['name' => 'Antalya', 'slug' => 'antalya'],
-            ['name' => 'Bursa', 'slug' => 'bursa'],
-            ['name' => 'Adana', 'slug' => 'adana'],
-            ['name' => 'Trabzon', 'slug' => 'trabzon'],
-            ['name' => 'Konya', 'slug' => 'konya'],
-            ['name' => 'Gaziantep', 'slug' => 'gaziantep'],
-            ['name' => 'Muğla', 'slug' => 'mugla'],
+            ['name' => 'Ankara', 'slug' => 'ankara'],
+            ['name' => 'Beijing', 'slug' => 'beijing'],
         ];
 
         foreach ($cities as $city) {
