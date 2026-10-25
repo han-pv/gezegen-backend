@@ -1,0 +1,23 @@
+meta {
+  name: Update Ticker
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://127.0.0.1:8000/api/v1/tickets/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "status": "cancelled"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

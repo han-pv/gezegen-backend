@@ -1,0 +1,27 @@
+meta {
+  name: Create Ticket
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://127.0.0.1:8000/api/v1/tickets
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "flight_id": 1,
+      "passenger_id": 1,
+      "seat_number": "A12",
+      "status": "booked",
+      "price": 199.99
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

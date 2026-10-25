@@ -1,0 +1,16 @@
+meta {
+  name: Delete TIcker
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://127.0.0.1:8000/api/v1/tickets/1
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  forwardAuthorizationHeader: false
+}
