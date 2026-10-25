@@ -4,43 +4,40 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource;
-use App\Models\Hotel\City;
-use Illuminate\Http\Request;
+use App\Http\Requests\CityStoreRequest;
+use App\Http\Requests\CityUpdateRequest;
+use App\Models\Api\V1\City;
+// use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
     public function index()
     {
-        return CityResource::collection(City::all());
-    }
+        $cities = City::get();
 
-    public function store(Request $request)
+        return CityResource::collection($cities)->additional(['success' => true]);
+    }
+    public function store(CityStoreRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:cities,slug',
-        ]);
+        $city = City::create($request->validated());
 
-        $city = City::create($data);
-
-        return (new CityResource($city))->response()->setStatusCode(201);
+        return (new CityResource($city))
+            ->additional(['success' => true, 'message' => 'City successfully created'])
+            ->response()
+            ->setStatusCode(201);
     }
-
     public function show(City $city)
     {
-        return new CityResource($city);
+        return (new CityResource($city))
+            ->additional(['success' => true]);
     }
 
-    public function update(Request $request, City $city)
+    public function update(CityUpdateRequest $request, City $city)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:cities,slug,'.$city->id,
-        ]);
+        $city->update($request->validated());
 
-        $city->update($data);
-
-        return new CityResource($city);
+        return (new CityResource($city))
+            ->additional(['success' => true, 'message' => 'City successfully updated']);
     }
 
     public function destroy(City $city)
@@ -48,7 +45,8 @@ class CityController extends Controller
         $city->delete();
 
         return response()->json([
-            'message' => 'City deleted',
+            'success' => true,
+            'message' => 'City successfully deleted'
         ], 200);
     }
 }

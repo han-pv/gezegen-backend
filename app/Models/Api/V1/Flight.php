@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable([
     'code',
-    'from_city_id',
-    'to_city_id',
+    'from_airport_id',
+    'to_airport_id',
     'from_time',
     'to_time',
     'airlines',
@@ -17,9 +17,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Flight extends Model
 {
-    public function city(): BelongsTo
+    public function airport(): BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(Airport::class);
     }
 
     public function tickets()
