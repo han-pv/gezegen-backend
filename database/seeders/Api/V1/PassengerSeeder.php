@@ -12,6 +12,8 @@ class PassengerSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $passengers = [
+            ['first_name' => 'John', 'last_name' => 'Doe', 'email' => 'john.doe@example.com', 'phone' => '123-456-7890', 'passport_number' => 'P12345678'],
+            ];
     }
 }

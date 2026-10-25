@@ -7,6 +7,11 @@ use App\Models\Hotel\Room;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\Api\V1\CitySeeder;
+use Database\Seeders\Api\V1\PassengerSeeder;
+use Database\Seeders\Api\V1\AirportSeeder;
+use Database\Seeders\Api\V1\TicketSeeder;
+use Database\Seeders\Api\V1\FlightSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,9 +30,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(CitySeeder::class);
+        $this->call(PassengerSeeder::class);
+        $this->call(AirportSeeder::class);
+        $this->call(FlightSeeder::class);
+        $this->call(TicketSeeder::class);
+        
 
-        Hotel::factory(100)->create();
+        // Hotel::factory(100)->create();
 
-        Room::factory(300)->create();
+        // Room::factory(300)->create();
     }
 }
