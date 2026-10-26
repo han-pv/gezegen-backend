@@ -21,6 +21,7 @@ class Flight extends Model
         'departure_time',
         'arrival_time',
         'total_seats',
+        'available_seats',
         'price',
     ];
 

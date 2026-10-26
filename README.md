@@ -1,6 +1,40 @@
 # Gezegen Backend API
 
-Base URL: `http://127.0.0.1:8000/api/v1`
+A flight booking system REST API built with Laravel 13 and PostgreSQL.
+
+## Tech Stack
+- Laravel 13
+- PostgreSQL
+- PHP 8.5
+
+## Setup
+```bash
+git clone https://github.com/han-pv/gezegen-backend.git
+cd gezegen-backend
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+## Base URL
+
+
+## Bruno Collection
+Import the `Gezegen Ticker API` folder from the root of this project into Bruno to test all endpoints.
+
+---
+
+## Buying a Ticket Flow
+1. `GET /airports` — get list of airports
+2. `GET /flights` — find available flights
+3. `POST /passengers` — create a passenger
+4. `POST /tickets` — buy a ticket linking passenger to flight
+
+> Buying a ticket automatically decreases the flight's `total_seats` by 1.
+
+---
 
 ## Airports
 
@@ -12,7 +46,7 @@ Base URL: `http://127.0.0.1:8000/api/v1`
 | PUT | /airports/{id} | Update airport |
 | DELETE | /airports/{id} | Delete airport |
 
-### POST /airports - Request Body
+**POST /airports — Request Body**
 ```json
 {
     "name": "Ashgabat International Airport",
@@ -22,17 +56,19 @@ Base URL: `http://127.0.0.1:8000/api/v1`
 }
 ```
 
+---
+
 ## Flights
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /flights | Get all flights |
-| GET | /flights/{id} | Get single flight |
+| GET | /flights | Get all flights (includes departure & arrival airport) |
+| GET | /flights/{id} | Get single flight with tickets |
 | POST | /flights | Create flight |
 | PUT | /flights/{id} | Update flight |
 | DELETE | /flights/{id} | Delete flight |
 
-### POST /flights - Request Body
+**POST /flights — Request Body**
 ```json
 {
     "departure_airport_id": 1,
@@ -44,38 +80,44 @@ Base URL: `http://127.0.0.1:8000/api/v1`
 }
 ```
 
+---
+
 ## Tickets
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /tickets | Get all tickets |
+| GET | /tickets | Get all tickets (includes flight and passenger) |
 | GET | /tickets/{id} | Get single ticket |
 | POST | /tickets | Create ticket |
 | PUT | /tickets/{id} | Update ticket |
 | DELETE | /tickets/{id} | Delete ticket |
 
-### POST /tickets - Request Body
+**POST /tickets — Request Body**
 ```json
 {
     "flight_id": 1,
     "passenger_id": 1,
     "seat_number": "A12",
     "status": "booked",
-    "price": 199.99
+    "price": 299.99
 }
 ```
+
+**Status values:** `booked` · `cancelled` · `completed`
+
+---
 
 ## Passengers
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | /passengers | Get all passengers |
-| GET | /passengers/{id} | Get single passenger |
+| GET | /passengers/{id} | Get single passenger with tickets and flights |
 | POST | /passengers | Create passenger |
 | PUT | /passengers/{id} | Update passenger |
 | DELETE | /passengers/{id} | Delete passenger |
 
-### POST /passengers - Request Body
+**POST /passengers — Request Body**
 ```json
 {
     "first_name": "John",

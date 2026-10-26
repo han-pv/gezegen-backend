@@ -13,11 +13,17 @@ class TicketController extends Controller
     {
         return response()->json(Ticket::with(['flight.departureAirport', 'flight.arrivalAirport', 'passenger'])->get());
     }
+
     public function store(StoreTicketRequest $request)
     {
         $ticket = Ticket::create($request->validated());
+
+        $flight = \App\Models\Tickets\Flight::findOrFail($request->flight_id);
+        $flight->decrement('total_seats');
+
         return response()->json($ticket->load(['flight.departureAirport', 'flight.arrivalAirport', 'passenger']), 201);
     }
+
     public function show(string $id)
     {
         $ticket = Ticket::with(['flight.departureAirport', 'flight.arrivalAirport', 'passenger'])->findOrFail($id);

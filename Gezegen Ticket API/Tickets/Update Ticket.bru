@@ -1,16 +1,23 @@
 meta {
-  name: Get Single Ticker
+  name: Update Ticket
   type: http
   seq: 2
 }
 
-get {
+put {
   url: http://127.0.0.1:8000/api/v1/tickets/1
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+      "status": "cancelled"
+  }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
   forwardAuthorizationHeader: false
 }

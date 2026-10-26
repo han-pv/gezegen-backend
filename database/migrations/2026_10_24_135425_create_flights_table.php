@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('departure_time');
             $table->dateTime('arrival_time');
             $table->integer('total_seats');
+            $table->integer('available_seats');
             $table->decimal('price', 10, 2);
             $table->timestamps();
         });

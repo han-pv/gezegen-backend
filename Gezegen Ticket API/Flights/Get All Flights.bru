@@ -1,16 +1,17 @@
 meta {
-  name: Delete TIcker
+  name: Get All Flights
   type: http
-  seq: 5
+  seq: 1
 }
 
-delete {
-  url: http://127.0.0.1:8000/api/v1/tickets/1
+get {
+  url: http://127.0.0.1:8000/api/v1/flights
   body: none
   auth: inherit
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
   forwardAuthorizationHeader: false
 }

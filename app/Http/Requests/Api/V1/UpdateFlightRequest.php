@@ -20,6 +20,7 @@ class UpdateFlightRequest extends FormRequest
             'departure_time'       => 'sometimes|date',
             'arrival_time'         => 'sometimes|date|after:departure_time',
             'total_seats'          => 'sometimes|integer|min:1',
+            'available_seats'      => 'sometimes|integer|min:0',
             'price'                => 'sometimes|numeric|min:0',
         ];
     }

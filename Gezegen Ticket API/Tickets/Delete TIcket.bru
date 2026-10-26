@@ -1,19 +1,13 @@
 meta {
-  name: Update Ticker
+  name: Delete TIcket
   type: http
-  seq: 4
+  seq: 2
 }
 
-put {
+delete {
   url: http://127.0.0.1:8000/api/v1/tickets/1
-  body: json
+  body: none
   auth: inherit
-}
-
-body:json {
-  {
-      "status": "cancelled"
-  }
 }
 
 settings {

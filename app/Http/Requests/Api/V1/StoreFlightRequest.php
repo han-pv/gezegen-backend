@@ -20,6 +20,7 @@ class StoreFlightRequest extends FormRequest
             'departure_time'       => 'required|date',
             'arrival_time'         => 'required|date|after:departure_time',
             'total_seats'          => 'required|integer|min:1',
+            'available_seats'      => 'required|integer|min:0',
             'price'                => 'required|numeric|min:0',
         ];
     }
