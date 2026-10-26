@@ -18,7 +18,9 @@ class AirportFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->city().' Airport',
+            'code' => strtoupper(fake()->unique()->lexify('???')),
+            'city' => fake()->city(),
         ];
     }
 }
