@@ -2,12 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\Flight;
-use App\Models\Passenger;
+use App\Models\Tickets\Flight;
+use App\Models\Tickets\Passenger;
+use App\Models\Tickets\Ticket;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TicketFactory extends Factory
 {
+    protected $model = Ticket::class;
+
     public function definition(): array
     {
         return [

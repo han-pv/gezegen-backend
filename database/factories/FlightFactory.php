@@ -3,10 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Airport;
+use App\Models\Tickets\Flight;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FlightFactory extends Factory
 {
+    protected $model = Flight::class;
+
     public function definition(): array
     {
         $departure = $this->faker->dateTimeBetween('+1 days', '+30 days');

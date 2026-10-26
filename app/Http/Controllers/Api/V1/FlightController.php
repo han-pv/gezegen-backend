@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreFlightRequest;
 use App\Http\Requests\Api\V1\UpdateFlightRequest;
-use App\Models\Flight;
+use App\Models\Tickets\Flight;
 
 class FlightController extends Controller
 {

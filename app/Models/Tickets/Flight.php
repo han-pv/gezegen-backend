@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Tickets;
 
+use App\Models\Airport;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
-
     use HasFactory;
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\FlightFactory::new();
+    }
 
     protected $fillable = [
         'departure_airport_id',
