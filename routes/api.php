@@ -10,13 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', [PingController::class, 'hello']);
 
-// Route::apiResource('hotels', HotelController::class);
-Route::get('/hotels', [HotelController::class, 'index']);
-Route::get('/hotels/{hotel}', [HotelController::class, 'show']);
-Route::post('/hotels', [HotelController::class, 'store']);
-Route::put('/hotels/{hotel}', [HotelController::class, 'update']);
-Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy']);
 Route::get('/hotels/{hotel}/hotellerin-roomy', [RoomController::class, 'forHotel']);
 
+Route::apiResource('hotels', HotelController::class);
 Route::apiResource('cities', CityController::class);
 Route::apiResource('rooms', RoomController::class);

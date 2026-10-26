@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(CitySeeder::class);
+        $this->call(AirportSeeder::class);
 
         Hotel::factory(100)->create();
 
