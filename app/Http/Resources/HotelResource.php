@@ -17,17 +17,19 @@ class HotelResource extends JsonResource
         return [
             'id' => $this->id,
             'city_id' => $this->city_id,
+            'city' => new CityResource($this->whenLoaded('city')),
             'name' => $this->name,
             'slug' => $this->slug,
             'address' => $this->address,
             'capacity' => $this->capacity,
-            'stars' => $this->stars,
             'phone' => $this->phone,
-            'image' => $this->image,
             'rating' => $this->rating,
-            'active' => $this->active,
-            'email' => $this->email,
             'description' => $this->description,
+            'image' => $this->image,
+            'active' => (bool) $this->active,
+            'rooms' => $this->RoomResource::collection($this->whenLoaded('rooms')),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

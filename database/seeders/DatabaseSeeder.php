@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Hotel\City;
 use App\Models\Hotel\Hotel;
 use App\Models\Hotel\Room;
 use App\Models\User;
@@ -17,17 +18,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(5)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        City::factory(5)->create()->each(function (City $city) {
+            Hotel::factory(rand(2, 4))->create([
+                'city_id' => $city->id,
+            ])->each(function (Hotel $hotel) {
+                Room::factory(rand(5, 10))->create([
+                    'hotel_id' => $hotel->id,
+                ]);
+            });
+        });
 
-        $this->call(CitySeeder::class);
-
-        Hotel::factory(100)->create();
-
-        Room::factory(300)->create();
+        $this->call([
+            CitySeeder::class,
+            HotelSeeder::class,
+            RoomSeeder::class,
+            FlightSeeder::class,
+            TicketSeeder::class,
+        ]);
     }
 }

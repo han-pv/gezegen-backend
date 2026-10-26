@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +17,8 @@ class CityResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug
+            'slug' => $this->slug,
+            'code' => $this->code,
         ];
     }
 }

@@ -14,17 +14,14 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->string('address')->nullable();
-            $table->unsignedInteger('capacity')->default(1);
-            $table->unsignedTinyInteger('stars')->nullable();
+            $table->string('address');
             $table->string('phone')->nullable();
-            $table->string('image')->nullable();
-            $table->decimal('rating', 3, 2)->nullable();
-            $table->boolean('active')->default(true);
-            $table->string('email')->nullable();
+            $table->unsignedTinyInteger('rating')->nullable();
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }
