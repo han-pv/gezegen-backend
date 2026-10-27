@@ -1,4 +1,5 @@
 # Gezegen Backend API
+
 ## Tech Stack
 - Laravel 13
 - PostgreSQL
@@ -21,7 +22,7 @@ http://127.0.0.1:8000/api/v1
 ```
 
 ## Bruno Collection
-Import the `Gezegen Ticker API` folder from the root of this project into Bruno to test all endpoints.
+Import the `Gezegen Ticker API` folder into Bruno.
 
 ---
 
@@ -37,13 +38,13 @@ Import the `Gezegen Ticker API` folder from the root of this project into Bruno 
 
 ## Tickets
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /tickets | Get all tickets (includes flight and passenger) |
-| GET | /tickets/{id} | Get single ticket |
-| POST | /tickets | Create ticket |
-| PUT | /tickets/{id} | Update ticket status |
-| DELETE | /tickets/{id} | Delete ticket |
+| Method | Endpoint | Status Codes | Description |
+|--------|----------|--------------|-------------|
+| GET | /tickets | `200 OK` | Get all tickets (includes flight and passenger) |
+| GET | /tickets/{id} | `200 OK`, `404 Not Found` | Get single ticket |
+| POST | /tickets | `201 Created`, `422 Unprocessable Entity` | Create ticket |
+| PUT | /tickets/{id} | `200 OK`, `404 Not Found`, `422 Unprocessable Entity` | Update ticket status |
+| DELETE | /tickets/{id} | `200 OK`, `404 Not Found` | Delete ticket |
 
 **POST /tickets — Request Body**
 ```json
@@ -96,13 +97,13 @@ Import the `Gezegen Ticker API` folder from the root of this project into Bruno 
 
 ## Passengers
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /passengers | Get all passengers |
-| GET | /passengers/{id} | Get single passenger with tickets and flights |
-| POST | /passengers | Create passenger |
-| PUT | /passengers/{id} | Update passenger |
-| DELETE | /passengers/{id} | Delete passenger |
+| Method | Endpoint | Status Codes | Description |
+|--------|----------|--------------|-------------|
+| GET | /passengers | `200 OK` | Get all passengers |
+| GET | /passengers/{id} | `200 OK`, `404 Not Found` | Get single passenger with tickets and flights |
+| POST | /passengers | `201 Created`, `422 Unprocessable Entity` | Create passenger |
+| PUT | /passengers/{id} | `200 OK`, `404 Not Found`, `422 Unprocessable Entity` | Update passenger |
+| DELETE | /passengers/{id} | `200 OK`, `404 Not Found` | Delete passenger |
 
 **POST /passengers — Request Body**
 ```json
@@ -120,13 +121,13 @@ Import the `Gezegen Ticker API` folder from the root of this project into Bruno 
 
 ## Flights
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /flights | Get all flights (includes departure & arrival airport) |
-| GET | /flights/{id} | Get single flight with tickets |
-| POST | /flights | Create flight |
-| PUT | /flights/{id} | Update flight |
-| DELETE | /flights/{id} | Delete flight |
+| Method | Endpoint | Status Codes | Description |
+|--------|----------|--------------|-------------|
+| GET | /flights | `200 OK` | Get all flights (includes departure & arrival airport) |
+| GET | /flights/{id} | `200 OK`, `404 Not Found` | Get single flight with tickets |
+| POST | /flights | `201 Created`, `422 Unprocessable Entity` | Create flight |
+| PUT | /flights/{id} | `200 OK`, `404 Not Found`, `422 Unprocessable Entity` | Update flight |
+| DELETE | /flights/{id} | `200 OK`, `404 Not Found` | Delete flight |
 
 **POST /flights — Request Body**
 ```json
@@ -144,13 +145,13 @@ Import the `Gezegen Ticker API` folder from the root of this project into Bruno 
 
 ## Airports
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /airports | Get all airports |
-| GET | /airports/{id} | Get single airport |
-| POST | /airports | Create airport |
-| PUT | /airports/{id} | Update airport |
-| DELETE | /airports/{id} | Delete airport |
+| Method | Endpoint | Status Codes | Description |
+|--------|----------|--------------|-------------|
+| GET | /airports | `200 OK` | Get all airports |
+| GET | /airports/{id} | `200 OK`, `404 Not Found` | Get single airport |
+| POST | /airports | `201 Created`, `422 Unprocessable Entity` | Create airport |
+| PUT | /airports/{id} | `200 OK`, `404 Not Found`, `422 Unprocessable Entity` | Update airport |
+| DELETE | /airports/{id} | `200 OK`, `404 Not Found` | Delete airport |
 
 **POST /airports — Request Body**
 ```json

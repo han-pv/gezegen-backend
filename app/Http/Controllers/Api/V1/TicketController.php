@@ -15,14 +15,42 @@ class TicketController extends Controller
     }
 
     public function store(StoreTicketRequest $request)
-    {
-        $ticket = Ticket::create($request->validated());
+        {
+            $validated = $request->validated();
+            $flight = \App\Models\Tickets\Flight::findOrFail($validated['flight_id']);
 
-        $flight = \App\Models\Tickets\Flight::findOrFail($request->flight_id);
-        $flight->decrement('total_seats');
+            if (isset($validated['passengers']) && is_array($validated['passengers'])) {
+                $tickets = [];
 
-        return response()->json($ticket->load(['flight.departureAirport', 'flight.arrivalAirport', 'passenger']), 201);
-    }
+                foreach ($validated['passengers'] as $passengerData) {
+                    $passenger = \App\Models\Tickets\Passenger::create([
+                        'full_name' => $passengerData['full_name'] ?? null,
+                        'email'     => $passengerData['email'] ?? null,
+                        'phone'     => $passengerData['phone'] ?? null,
+                    ]);
+
+                    $ticket = Ticket::create([
+                        'flight_id' => $flight->id,
+                        'passenger_id' => $passenger->id,
+                        'seat'      => $passengerData['seat'] ?? ('A' . rand(1, 30)), // Fallback seat generator if not provided
+                        'price'     => $flight->price,
+                        'status'    => 'Booked',
+                    ]);
+
+                    $flight->decrement('total_seats');
+
+                    $tickets[] = $ticket->load(['flight.departureAirport', 'flight.arrivalAirport', 'passenger']);
+                }
+
+                return response()->json($tickets, 201);
+            }
+
+            // Fallback for single ticket creation
+            $ticket = Ticket::create($validated);
+            $flight->decrement('total_seats');
+
+            return response()->json($ticket->load(['flight.departureAirport', 'flight.arrivalAirport', 'passenger']), 201);
+        }
 
     public function show(string $id)
     {
