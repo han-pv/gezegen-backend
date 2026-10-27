@@ -53,7 +53,6 @@ class TicketController extends Controller
         try {
             $flight = Flight::lockForUpdate()->findOrFail($validated['flight_id']);
 
-            // Проверяем свободные места (у тебя поле называется empty_seats)
             if ($flight->empty_seats < $validated['seats_count']) {
                 return response()->json([
                     'success' => false,
@@ -73,7 +72,6 @@ class TicketController extends Controller
 
             $totalPrice = $flight->price * $validated['seats_count'];
 
-            // 4. Создаем билет
             $ticket = Ticket::create([
                 'flight_id' => $flight->id,
                 'passanger_id' => $passenger->id,

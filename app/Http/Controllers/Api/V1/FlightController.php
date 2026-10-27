@@ -15,9 +15,6 @@ class FlightController extends Controller
     {
         $query = Flight::with(['departureAirport', 'arrivalAirport']);
 
-        if ($request->has('status')) {
-            $query->where('status', $request->query('status'));
-        }
 
         if ($request->has('departure_airport_id')) {
             $query->where('departure_airport_id', $request->query('departure_airport_id'));
@@ -27,6 +24,10 @@ class FlightController extends Controller
             $query->where('arrival_airport_id', $request->query('arrival_airport_id'));
         }
 
+        if ($request->has('date')) {
+            $date = $request->query('date');
+            $query->whereDate('departure_time', $date);
+        }
         $flights = $query->latest()->paginate(15);
 
         return response()->json([

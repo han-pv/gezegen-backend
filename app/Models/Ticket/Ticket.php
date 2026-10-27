@@ -23,7 +23,7 @@ class Ticket extends Model
         return $this->belongsTo(Flight::class);
     }
 
-    public function passenger(): BelongsTo
+    public function passanger(): BelongsTo
     {
         return $this->belongsTo(Passanger::class, 'passanger_id');
     }
