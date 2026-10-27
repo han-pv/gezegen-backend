@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\CityController;
 use App\Http\Controllers\Api\V1\RoomController;
 use App\Http\Controllers\Api\V1\FlightController;
 use App\Http\Controllers\Api\V1\TicketController;
+use App\Http\Controllers\Api\V1\AirplaneController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -38,4 +39,8 @@ Route::prefix('v1')->group(function () {
     Route::post('tickets/quote', [TicketController::class, 'quote']);
     Route::post('tickets', [TicketController::class, 'store']);
     Route::get('tickets/{code}', [TicketController::class, 'show']);
+
+    Route::get('airplanes', [AirplaneController::class, 'index']);
+    Route::get('airplanes/{id}', [AirplaneController::class, 'show']);
+    Route::post('airplanes', [AirplaneController::class, 'store']);
 });

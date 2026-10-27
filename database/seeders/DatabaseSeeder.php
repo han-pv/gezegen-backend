@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             HotelSeeder::class,
             RoomSeeder::class,
+            AirplaneSeeder::class,
             FlightSeeder::class,
             TicketSeeder::class,
         ]);

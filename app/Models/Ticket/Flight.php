@@ -14,7 +14,7 @@ class Flight extends Model
     protected $fillable = [
         'from_city_id', 'to_city_id', 'airline', 'flight_number',
         'departure_at', 'arrival_at', 'price',
-        'total_seats', 'available_seats', 'active',
+        'total_seats', 'available_seats', 'active', 'airplane_id',
     ];
 
     protected $casts = [
@@ -42,5 +42,10 @@ class Flight extends Model
     protected static function newFactory()
     {
         return FlightFactory::new();
+    }
+
+    public function airplane()
+    {
+        return $this->belongsTo(Airplane::class);
     }
 }

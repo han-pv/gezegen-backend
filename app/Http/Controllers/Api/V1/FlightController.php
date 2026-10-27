@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FlightIndexRequest;
 use App\Http\Requests\FlightStoreRequest;
 use App\Models\Hotel\City;
+use App\Models\Ticket\Airplane;
 
 class FlightController extends Controller
 {
@@ -57,11 +58,15 @@ class FlightController extends Controller
 
     public function store(FlightStoreRequest $request)
     {
-        $data = $request->validated();
-        $data['available_seats'] = $data['total_seats'];
+        $data     = $request->validated();
+        $airplane = Airplane::findOrFail($data['airplane_id']);
+
+        $data['airline']         = $airplane->airline;
+        $data['total_seats']     = $airplane->capacity;
+        $data['available_seats'] = $airplane->capacity;
 
         $flight = Flight::create($data);
 
-        return response()->json($flight->load('fromCity', 'toCity'), 201);
+        return response()->json($flight->load('fromCity', 'toCity', 'airplane'), 201);
     }
 }
