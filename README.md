@@ -1,7 +1,4 @@
 # Gezegen Backend API
-
-A flight booking system REST API built with Laravel 13 and PostgreSQL.
-
 ## Tech Stack
 - Laravel 13
 - PostgreSQL
@@ -19,7 +16,9 @@ php artisan serve
 ```
 
 ## Base URL
-
+```
+http://127.0.0.1:8000/api/v1
+```
 
 ## Bruno Collection
 Import the `Gezegen Ticker API` folder from the root of this project into Bruno to test all endpoints.
@@ -32,27 +31,88 @@ Import the `Gezegen Ticker API` folder from the root of this project into Bruno 
 3. `POST /passengers` — create a passenger
 4. `POST /tickets` — buy a ticket linking passenger to flight
 
-> Buying a ticket automatically decreases the flight's `total_seats` by 1.
+> Buying a ticket automatically decreases the flight's `total_seats`.
 
 ---
 
-## Airports
+## Tickets
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /airports | Get all airports |
-| GET | /airports/{id} | Get single airport |
-| POST | /airports | Create airport |
-| PUT | /airports/{id} | Update airport |
-| DELETE | /airports/{id} | Delete airport |
+| GET | /tickets | Get all tickets (includes flight and passenger) |
+| GET | /tickets/{id} | Get single ticket |
+| POST | /tickets | Create ticket |
+| PUT | /tickets/{id} | Update ticket status |
+| DELETE | /tickets/{id} | Delete ticket |
 
-**POST /airports — Request Body**
+**POST /tickets — Request Body**
 ```json
 {
-    "name": "Ashgabat International Airport",
-    "code": "ASB",
-    "city": "Ashgabat",
-    "country": "Turkmenistan"
+    "flight_id": 1,
+    "passenger_id": 1,
+    "seat_number": "A12",
+    "status": "booked",
+    "price": 299.99
+}
+```
+
+**PUT /tickets/{id} — Request Body**
+```json
+{
+    "status": "cancelled"
+}
+```
+
+**Status values:** `booked` · `cancelled` · `completed`
+
+**GET /tickets — Response Example**
+```json
+[
+  {
+    "id": 1,
+    "flight_id": 1,
+    "passenger_id": 1,
+    "seat_number": "A12",
+    "status": "booked",
+    "price": "299.99",
+    "flight": {
+      "id": 1,
+      "departure_airport": { "city": "Ashgabat", "code": "ASB" },
+      "arrival_airport": { "city": "Istanbul", "code": "IST" },
+      "departure_time": "2026-10-28 10:00:00",
+      "arrival_time": "2026-10-28 14:00:00"
+    },
+    "passenger": {
+      "id": 1,
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com"
+    }
+  }
+]
+```
+
+---
+
+## Passengers
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /passengers | Get all passengers |
+| GET | /passengers/{id} | Get single passenger with tickets and flights |
+| POST | /passengers | Create passenger |
+| PUT | /passengers/{id} | Update passenger |
+| DELETE | /passengers/{id} | Delete passenger |
+
+**POST /passengers — Request Body**
+```json
+{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "phone": "+99312345678",
+    "passport_number": "TM1234567",
+    "date_of_birth": "1990-01-01"
 }
 ```
 
@@ -82,49 +142,22 @@ Import the `Gezegen Ticker API` folder from the root of this project into Bruno 
 
 ---
 
-## Tickets
+## Airports
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /tickets | Get all tickets (includes flight and passenger) |
-| GET | /tickets/{id} | Get single ticket |
-| POST | /tickets | Create ticket |
-| PUT | /tickets/{id} | Update ticket |
-| DELETE | /tickets/{id} | Delete ticket |
+| GET | /airports | Get all airports |
+| GET | /airports/{id} | Get single airport |
+| POST | /airports | Create airport |
+| PUT | /airports/{id} | Update airport |
+| DELETE | /airports/{id} | Delete airport |
 
-**POST /tickets — Request Body**
+**POST /airports — Request Body**
 ```json
 {
-    "flight_id": 1,
-    "passenger_id": 1,
-    "seat_number": "A12",
-    "status": "booked",
-    "price": 299.99
-}
-```
-
-**Status values:** `booked` · `cancelled` · `completed`
-
----
-
-## Passengers
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /passengers | Get all passengers |
-| GET | /passengers/{id} | Get single passenger with tickets and flights |
-| POST | /passengers | Create passenger |
-| PUT | /passengers/{id} | Update passenger |
-| DELETE | /passengers/{id} | Delete passenger |
-
-**POST /passengers — Request Body**
-```json
-{
-    "first_name": "John",
-    "last_name": "Doe",
-    "email": "john@example.com",
-    "phone": "+99312345678",
-    "passport_number": "TM1234567",
-    "date_of_birth": "1990-01-01"
+    "name": "Ashgabat International Airport",
+    "code": "ASB",
+    "city": "Ashgabat",
+    "country": "Turkmenistan"
 }
 ```
