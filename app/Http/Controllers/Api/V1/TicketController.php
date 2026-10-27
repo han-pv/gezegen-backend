@@ -17,34 +17,34 @@ class TicketController extends Controller
         return TicketResource::collection($tickets);
     }
 
+
+
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'flight_id' => 'required|exists:flights,id',
-            'full_name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-            'seat_number' => 'nullable|string',
-        ]);
+        $flight = Flight::find($request->flight_id);
 
-        $passenger = Passenger::firstOrCreate(
-            ['email' => $validated['email']],
-            ['full_name' => $validated['full_name'], 'phone' => $validated['phone']]
-        );
-
-        $flight = Flight::findOrFail($validated['flight_id']);
-
+        // Göni tickets tablisasyna maglumatlary ýazýarys
         $ticket = Ticket::create([
-            'flight_id' => $flight->id,
-            'passenger_id' => $passenger->id,
-            'seat_number' => $validated['seat_number'] ?? rand(1, 30) . 'A',
-            'price' => $flight->price,
+            'flight_id' => $request->flight_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'passport_number' => $request->passport_number,
+            'seat_number' => $request->seat_number ?? '12A',
+            'seats_count' => 1,
+            'total_price' => $flight ? $flight->price : 100,
         ]);
 
-        if ($flight->empty_seats > 0) {
+        // Uçuň boş orun sanyny 1 sany kemeltmek
+        // Uçuň boş orun sanyny 1 sany kemeltmek
+        if ($flight) {
             $flight->decrement('empty_seats');
         }
 
-        return new TicketResource($ticket->load(['flight.fromAirport', 'flight.toAirport', 'passenger']));
+        return response()->json([
+            'message' => 'Bilet üstünlikli alyndy!',
+            'seats' => $flight->empty_seats ?? 0
+        ]);
     }
 }

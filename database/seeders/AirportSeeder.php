@@ -15,6 +15,10 @@ class AirportSeeder extends Seeder
             ['name' => 'O\'Hare International Airport', 'city' => 'Chicago', 'code' => 'ORD'],
             ['name' => 'San Francisco International Airport', 'city' => 'San Francisco', 'code' => 'SFO'],
             ['name' => 'Miami International Airport', 'city' => 'Miami', 'code' => 'MIA'],
+            ['name' => 'Ashgabat International Airport', 'city' => 'Ashgabat', 'code' => 'ASB'],
+            ['name' => 'Istanbul Airport', 'city' => 'Istanbul', 'code' => 'IST'],
+            ['name' => 'Dubai International Airport', 'city' => 'Dubai', 'code' => 'DXB'],
+            ['name' => 'Heathrow Airport', 'city' => 'London', 'code' => 'LHR'],
         ];
 
         foreach ($airports as $airport) {

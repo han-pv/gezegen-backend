@@ -46,3 +46,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/tickets/{id}', [TicketController::class, 'show']);   // Parametrli route ({id})
 
 });
+
+Route::prefix('v1')->group(function () {
+    Route::get('/cities', [CityController::class, 'index']);
+});
