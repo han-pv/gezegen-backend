@@ -6,6 +6,7 @@ use App\Models\Tickets\City;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Database\Seeders\Api\V1\AirportSeeder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable([
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Airport extends Model
 {
+    use HasFactory;
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);

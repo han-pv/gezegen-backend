@@ -3,6 +3,7 @@
 namespace App\Models\Tickets;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -15,5 +16,5 @@ use Illuminate\Database\Eloquent\Model;
 ])]
 class Passenger extends Model
 {
-    //
+    use HasFactory;
 }
