@@ -2,62 +2,39 @@
 
 namespace App\Models\Hotel;
 
-use Database\Factories\Hotel\HotelFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Hotel\City;
+use Database\Factories\HotelFactory;
 
-#[Fillable([
-    'city_id',
-    'name',
-    'slug',
-    'address',
-    'capacity',
-    'stars',
-    'phone',
-    'image',
-    'rating',
-    'active',
-    'email',
-    'description',
-])]
 class Hotel extends Model
 {
-    /** @use HasFactory<HotelFactory> */
     use HasFactory;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected static function newFactory(): HotelFactory
     {
-        return [
-            'capacity' => 'integer',
-            'stars' => 'integer',
-            'rating' => 'decimal:2',
-            'active' => 'boolean',
-        ];
+        return HotelFactory::new();
     }
 
-    /**
-     * Get the city that owns the hotel.
-     *
-     * @return BelongsTo<City, $this>
-     */
+    protected $fillable = [
+        'city_id',
+        'name',
+        'slug',
+        'address',
+        'phone',
+        'rating',
+        'description',
+        'image',
+        'active',
+    ];
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
     }
 
-    /**
-     * Get the rooms that belong to the hotel.
-     *
-     * @return HasMany<Room, $this>
-     */
     public function rooms(): HasMany
     {
         return $this->hasMany(Room::class);

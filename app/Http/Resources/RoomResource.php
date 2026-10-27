@@ -16,11 +16,12 @@ class RoomResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'hotel_id' => $this->hotel_id,
-            'name' => $this->name,
+            'room_number' => $this->room_number,
+            'capacity' => $this->capacity,
+            'price_per_night' => $this->price_per_night,
             'room_type' => $this->room_type,
-            'price' => $this->price,
-            'is_available' => $this->is_available,
+            'is_available' => (bool) $this->is_available,
+            'description' => $this->description,
         ];
     }
 }

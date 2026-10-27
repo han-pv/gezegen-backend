@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->timestamps();
+        Schema::table('flights', function (Blueprint $table) {
+            $table->foreignId('airplane_id')->nullable()->after('to_city_id')
+            ->constrained('airplanes')->nullOnDelete();
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::table('flights', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('airplane_id');
+        });
     }
 };

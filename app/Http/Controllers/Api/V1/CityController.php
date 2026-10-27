@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CityResource;
 use App\Models\Hotel\City;
 use Illuminate\Http\Request;
 
@@ -11,44 +10,52 @@ class CityController extends Controller
 {
     public function index()
     {
-        return CityResource::collection(City::all());
+        $cities = City::paginate(24);
+
+        return response()->json($cities);
+    }
+
+    public function show($id)
+    {
+        $city = City::find($id);
+
+        return response()->json($city);
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:cities,slug',
+            'slug' => 'required|string|unique:cities,slug',
+            'code' => 'required|string|max:10',
         ]);
 
-        $city = City::create($data);
+        $city = City::create($validated);
 
-        return (new CityResource($city))->response()->setStatusCode(201);
+        return response()->json($city, 201);
     }
 
-    public function show(City $city)
+    public function update($id, Request $request)
     {
-        return new CityResource($city);
-    }
+        $city = City::find($id);
 
-    public function update(Request $request, City $city)
-    {
-        $data = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:cities,slug,'.$city->id,
+            'slug' => 'required|string|unique:cities,slug,' . $id,
+            'code' => 'required|string|max:10',
         ]);
 
-        $city->update($data);
+        $city->update($validated);
 
-        return new CityResource($city);
+        return response()->json($city, 201);
+
     }
 
-    public function destroy(City $city)
+    public function destroy($id)
     {
+        $city = City::find($id);
         $city->delete();
 
-        return response()->json([
-            'message' => 'City deleted',
-        ], 200);
+        return response()->json(null, 204);
     }
 }
