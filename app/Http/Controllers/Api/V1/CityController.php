@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource;
 use App\Http\Requests\CityStoreRequest;
 use App\Http\Requests\CityUpdateRequest;
-use App\Models\Api\V1\City;
+use App\Models\Tickets\City;
 // use Illuminate\Http\Request;
 
 class CityController extends Controller

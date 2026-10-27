@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\Api\V1;
+namespace App\Models\Tickets;
 
+use App\Models\Tickets\City;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Database\Seeders\Api\V1\AirportSeeder;

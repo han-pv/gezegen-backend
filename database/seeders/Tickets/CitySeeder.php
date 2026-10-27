@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders\Api\V1;
+namespace Database\Seeders\Tickets;
 
-use App\Models\Api\V1\City;
+use App\Models\Tickets\City;
 use Illuminate\Database\Seeder;
 
 class CitySeeder extends Seeder

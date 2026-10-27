@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Seeders\Api\V1;
+namespace Database\Seeders\Tickets;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use \App\Models\Api\V1\Airport;
+use \App\Models\Tickets\Airport;
 
 class AirportSeeder extends Seeder
 {

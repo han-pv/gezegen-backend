@@ -19,6 +19,7 @@ class TicketResource extends JsonResource
             'flight_id' => $this->flight_id,
             'date' => $this->date,
             'price' => $this->price,
+            'seats' => $this->seats,
         ];
     }
 }

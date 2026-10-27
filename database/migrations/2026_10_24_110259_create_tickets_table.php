@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('flight_id')->constrained('flights')->onDelete('cascade');
             $table->date('date');
             $table->integer('price')->unsigned();
+            $table->unsignedSmallInteger('seats')->default(20);
             $table->timestamps();
         });
     }

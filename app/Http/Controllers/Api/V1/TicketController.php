@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TicketStoreRequest;
 use App\Http\Requests\TicketUpdateRequest;
 use App\Http\Resources\TicketResource;
-use App\Models\Api\V1\Ticket;
+use App\Models\Tickets\Passenger;
+use App\Models\Tickets\Ticket;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -49,5 +51,34 @@ class TicketController extends Controller
             'success' => true,
             'message' => 'Ticket successfully deleted'
         ], 200);
+    }
+
+    public function book(Request $request, Ticket $ticket)
+    {
+        // 1. Проверяем, есть ли еще свободные места
+        if ($ticket->seats < 1) {
+            return response()->json(['message' => 'No empty seats left'], 400);
+        }
+
+        // 2. Валидация входных данных
+        $validated = $request->validate([
+            'first_name'      => 'required|string',
+            'last_name'       => 'required|string',
+            'email'           => 'required|email',
+            'phone'           => 'required|string',
+            'passport_number' => 'required|string',
+        ]);
+
+        // 3. Сохраняем пассажира в БД
+        Passenger::create($validated);
+
+        // 4. Уменьшаем количество мест у билета на 1 в БД
+        $ticket->decrement('seats');
+
+        // 5. Возвращаем обновленное количество мест
+        return response()->json([
+            'message' => 'Successfully booked',
+            'seats'   => $ticket->seats
+        ]);
     }
 }

@@ -7,11 +7,11 @@ use App\Models\Hotel\Room;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Database\Seeders\Api\V1\CitySeeder;
-use Database\Seeders\Api\V1\PassengerSeeder;
-use Database\Seeders\Api\V1\AirportSeeder;
-use Database\Seeders\Api\V1\TicketSeeder;
-use Database\Seeders\Api\V1\FlightSeeder;
+use Database\Seeders\Tickets\CitySeeder;
+use Database\Seeders\Tickets\PassengerSeeder;
+use Database\Seeders\Tickets\AirportSeeder;
+use Database\Seeders\Tickets\TicketSeeder;
+use Database\Seeders\Tickets\FlightSeeder;
 
 class DatabaseSeeder extends Seeder
 {

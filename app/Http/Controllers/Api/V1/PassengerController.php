@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 // use Illuminate\Http\Request;
 use App\Http\Requests\PassengerStoreRequest;
 use App\Http\Resources\PassengerResource;
-use App\Models\Api\V1\Passenger;
+use App\Models\Tickets\Passenger;
 
 class PassengerController extends Controller
 {

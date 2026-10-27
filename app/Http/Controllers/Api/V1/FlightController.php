@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FlightStoreRequest;
 use App\Http\Requests\FlightUpdateRequest;
 use App\Http\Resources\FlightResource;
-use App\Models\Api\V1\Flight;
+use App\Models\Tickets\Flight;
 
 class FlightController extends Controller
 {

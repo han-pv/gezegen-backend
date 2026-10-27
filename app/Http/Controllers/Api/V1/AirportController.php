@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AirportStoreRequest;
 use App\Http\Requests\AirportUpdateRequest;
 use App\Http\Resources\AirportResource;
-use App\Models\Api\V1\Airport;
+use App\Models\Tickets\Airport;
 
 class AirportController extends Controller
 {
