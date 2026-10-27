@@ -30,6 +30,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AirportSeeder::class);
 
         Flight::factory(50)->create();
+        
+        $this->call(PassengerSeeder::class);
+        $this->call(TicketSeeder::class);
+
 
         Hotel::factory(100)->create();
 
