@@ -74,4 +74,34 @@ class TicketController extends Controller
 
         return TicketResource::collection($tickets)->response()->setStatusCode(201);
     }
+
+    public function update(Request $request, Ticket $ticket)
+    {
+        $data = $request->validate([
+            'full_name' => 'sometimes|required|string|max:255',
+            'email' => ['sometimes', 'required', 'email', 'regex:/\.com$/i'],
+            'phone' => ['sometimes', 'required', 'regex:/^\+[0-9]+$/'],
+        ]);
+
+        $ticket->passenger->update($data);
+
+        return new TicketResource(
+            $ticket->load('flight.fromAirport', 'flight.toAirport', 'passenger')
+        );
+    }
+
+    public function destroy(Ticket $ticket)
+    {
+        DB::transaction(function () use ($ticket) {
+            $flight = Flight::lockForUpdate()->findOrFail($ticket->flight_id);
+            $passenger = $ticket->passenger;
+
+            $ticket->delete();
+            $passenger->delete();
+
+            $flight->increment('seats_available');
+        });
+
+        return response()->noContent();
+    }
 }
