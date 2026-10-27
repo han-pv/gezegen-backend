@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Hotel\Hotel;
-use App\Models\Hotel\Room;
-use App\Models\User;
+// use App\Models\Hotel\Hotel;
+// use App\Models\Hotel\Room;
+use App\Models\Ticket\Flight;
+// use App\Models\User;
+use Database\Seeders\Ticket\AirportSeeder;
+use Database\Seeders\Ticket\CitySeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,10 +27,15 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(CitySeeder::class);
+        $this->call([
+            CitySeeder::class,
+            AirportSeeder::class,
+        ]);
 
-        Hotel::factory(100)->create();
+        Flight::factory(100)->create();
 
-        Room::factory(300)->create();
+        // Hotel::factory(100)->create();
+
+        // Room::factory(300)->create();
     }
 }
