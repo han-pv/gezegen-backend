@@ -55,7 +55,7 @@ class FlightSeeder extends Seeder
             'destination_airport_id' => 4,
             'departure_time' => '2026-10-28 20:00:00',
             'arrival_time' => '2026-10-29 08:00:00',
-            'duration' => '7 hr 00 min',
+            'duration' => '12 hr 00 min', // Updated from 7 hr 00 min
             'price' => 540.00,
             'empty_seats' => 5,
         ]);
@@ -67,7 +67,7 @@ class FlightSeeder extends Seeder
             'destination_airport_id' => 5,
             'departure_time' => '2026-10-30 14:15:00',
             'arrival_time' => '2026-10-30 17:45:00',
-            'duration' => '6 hr 30 min',
+            'duration' => '3 hr 30 min', // Updated from 6 hr 30 min
             'price' => 320.00,
             'empty_seats' => 12,
         ]);
