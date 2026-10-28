@@ -22,8 +22,10 @@ http://127.0.0.1:8000/api/v1
 ```
 
 ## Bruno Collection
-Import the `Gezegen Ticker API` folder into Bruno.
+Import the `Gezegen Ticket API` folder into Bruno.
 
+
+> Note: If any server error occurs, the API returns `500 Internal Server Error`.
 ---
 
 ## Buying a Ticket Flow
@@ -54,6 +56,20 @@ Import the `Gezegen Ticker API` folder into Bruno.
     "seat_number": "A12",
     "status": "booked",
     "price": 299.99
+}
+```
+
+**POST /tickets — Response Example (201)**
+```json
+{
+    "id": 101,
+    "flight_id": 1,
+    "passenger_id": 1,
+    "seat_number": "A12",
+    "status": "booked",
+    "price": "299.99",
+    "created_at": "2026-10-28T10:00:00.000000Z",
+    "updated_at": "2026-10-28T10:00:00.000000Z"
 }
 ```
 
