@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\FlightController;
 use App\Http\Controllers\Api\V1\HotelController;
 use App\Http\Controllers\Api\V1\RoomController;
 use App\Http\Controllers\Api\V1\TicketController;
+use App\Http\Controllers\Api\V1\PassengerController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -17,4 +18,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('airports', AirportController::class)->only(['index', 'show']);
     Route::apiResource('flights', FlightController::class)->only(['index', 'show']);
     Route::apiResource('tickets', TicketController::class);
+        Route::apiResource('passengers', PassengerController::class);
 });
