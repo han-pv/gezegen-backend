@@ -9,6 +9,6 @@ class FlightSeeder extends Seeder
 {
     public function run(): void
     {
-        Flight::factory(30)->create();
+        Flight::factory(10)->create();
     }
 }
