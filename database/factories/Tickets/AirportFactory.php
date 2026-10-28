@@ -20,9 +20,9 @@ class AirportFactory extends Factory
     public function definition(): array
     {
         return [
-            'city_id' => City::factory(), // Автоматически создаст город, если он не передан
+            'city_id' => City::factory(), 
             'name' => $this->faker->company() . ' Airport',
-            'code' => strtoupper($this->faker->unique()->lexify('???')), // Трехбуквенный IATA код
+            'code' => strtoupper($this->faker->unique()->lexify('???')), 
         ];
     }
 }

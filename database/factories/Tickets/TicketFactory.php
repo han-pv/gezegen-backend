@@ -22,7 +22,7 @@ class TicketFactory extends Factory
             'flight_id' => Flight::factory(),
             'date' => $this->faker->dateTimeBetween('now', '+1 month')->format('Y-m-d'),
             'price' => $this->faker->numberBetween(150, 800),
-            'seats' => 20, // Дефолтное количество мест
+            'seats' => 20, 
         ];
     }
 }

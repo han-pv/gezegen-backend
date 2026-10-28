@@ -55,12 +55,10 @@ class TicketController extends Controller
 
     public function book(Request $request, Ticket $ticket)
     {
-        // 1. Проверяем, есть ли еще свободные места
         if ($ticket->seats < 1) {
             return response()->json(['message' => 'No empty seats left'], 400);
         }
 
-        // 2. Валидация входных данных
         $validated = $request->validate([
             'first_name'      => 'required|string',
             'last_name'       => 'required|string',
@@ -69,13 +67,10 @@ class TicketController extends Controller
             'passport_number' => 'required|string',
         ]);
 
-        // 3. Сохраняем пассажира в БД
         Passenger::create($validated);
 
-        // 4. Уменьшаем количество мест у билета на 1 в БД
         $ticket->decrement('seats');
 
-        // 5. Возвращаем обновленное количество мест
         return response()->json([
             'message' => 'Successfully booked',
             'seats'   => $ticket->seats

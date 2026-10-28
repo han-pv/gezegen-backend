@@ -23,7 +23,7 @@ class FlightFactory extends Factory
             'to_airport_id' => Airport::factory(),
             'from_time' => $this->faker->time('H:i:s'),
             'to_time' => $this->faker->time('H:i:s'),
-            'code' => strtoupper($this->faker->unique()->bothify('??###')), // Например: AA101
+            'code' => strtoupper($this->faker->unique()->bothify('??###')), 
             'airlines' => $this->faker->company(),
         ];
     }

@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TicketSeeder::class);
 
         \App\Models\Tickets\City::factory(15)->create();
-        \App\Models\Tickets\Passenger::factory(15)->create();
         \App\Models\Tickets\Airport::factory(15)->create();
         \App\Models\Tickets\Flight::factory(15)->create();
         \App\Models\Tickets\Ticket::factory(15)->create();
